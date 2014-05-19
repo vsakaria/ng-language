@@ -48,6 +48,7 @@ angular.module('myApp.services', [])
         "es": "Amigable",
         def: "Kind and pleasant."
     }])
+
     .factory('ShuffleArray', function(){
 
         var ShuffleArray = {
@@ -56,14 +57,10 @@ angular.module('myApp.services', [])
                 , temporaryValue
                 , randomIndex;
 
-              // While there remain elements to shuffle...
               while (0 !== currentIndex) {
-
-                // Pick a remaining element...
                 randomIndex = Math.floor(Math.random() * currentIndex);
                 currentIndex -= 1;
 
-                // And swap it with the current element.
                 temporaryValue = array[currentIndex];
                 array[currentIndex] = array[randomIndex];
                 array[randomIndex] = temporaryValue;
@@ -85,4 +82,24 @@ angular.module('myApp.services', [])
         }
 
         return RandWords;
+    })
+
+    .factory('QA', function(ShuffleArray, RandWords){
+        var answersBucket = RandWords.get();
+        var questionsBucket = answersBucket;
+        var questionToRemove, answers, question;
+
+        var QA = {
+            answers: function(){
+                answers = ShuffleArray.shuffle(answersBucket).slice(0,3);
+                return answers
+            },
+            question: function(){
+                questionToRemove = questionsBucket.indexOf(answers[Math.floor(Math.random() * 3)]);
+                question = questionsBucket.splice(questionToRemove, 1)[0];
+                console.log(answersBucket)
+                return question;
+            }
+        };
+        return QA;
     });

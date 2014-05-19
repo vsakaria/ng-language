@@ -7,27 +7,20 @@ angular.module('myApp.controllers', [])
   .controller('AppCtrl',function($scope, $http) {
   })
 
-  .controller('Game', function($scope, RandWords, ShuffleArray, $http) {
+  .controller('Game', function($scope, QA, $http) {
     $scope.round = 1;
     $scope.playing = true;
 
-    var answersBucket = RandWords.get();
-    var questionsBucket = answersBucket;
-    var questionToRemove;
-
-    function setupQA() {
-      $scope.answers = ShuffleArray.shuffle(answersBucket).slice(0,3);
-      questionToRemove = questionsBucket.indexOf($scope.answers[Math.floor(Math.random() * 3)]);
-      $scope.question = questionsBucket.splice(questionToRemove, 1)[0]
-    };
-    setupQA();
+    $scope.answers = QA.answers();
+    $scope.question = QA.question();
 
     $scope.submitAnswer = function(question, answer){
       if($scope.round <= 3) {
         if(question.en == answer.en){
           $scope.round++;
 
-          setupQA();
+          $scope.answers = QA.answers();
+          $scope.question = QA.question();
 
           if($scope.round == 4){
             $scope.playing = false;
