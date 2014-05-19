@@ -79,7 +79,7 @@ angular.module('myApp.services', [])
 
         var RandWords = {
             get: function() {
-                randwords = ShuffleArray.shuffle(words).slice(0,3);
+                randwords = ShuffleArray.shuffle(words).slice(0,9);
                 return randwords;
             }
         }
