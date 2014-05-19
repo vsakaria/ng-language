@@ -19,7 +19,8 @@ angular.module('myApp.controllers', [])
 
   .controller('Game', function($scope, RandWords) {
 
-    $scope.game_words = RandWords.get()
+    $scope.gamewords =  RandWords.get();
+    $scope.random = function(){ return Math.floor((Math.random() * 3) + 0) };
 
     /* ===== */
     var submitScore = function(name, score) {

@@ -1,1 +1,9 @@
 <h1> Welcome to the Game</h1>
+
+<section class='question'>
+  <h1>{{ gamewords[random()].en }}</h1>
+</section>
+
+<section class='answers' ng-repeat='words in gamewords'>
+  <p>{{ words.es }}</p>
+</section>
