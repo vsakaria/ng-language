@@ -8,19 +8,34 @@ angular.module('myApp.controllers', [])
     $http({
       method: 'GET',
       url: '/api/name'
-    }).
-    success(function(data, status, headers, config) {
+    })
+    .success(function(data, status, headers, config) {
       $scope.name = data.name;
-    }).
-    error(function(data, status, headers, config) {
+    })
+    .error(function(data, status, headers, config) {
       $scope.name = 'Error!'
     });
   })
 
   .controller('Game', function($scope, RandWords) {
+
     $scope.game_words = RandWords.get()
+
+    /* ===== */
+    var submitScore = function(name, score) {
+
+    }
+    /*=====*/
   })
 
-  .controller('MyCtrl2', function($scope) {
-    // write Ctrl here
+  .controller('Highscores', function($scope, $http){
+    $http({
+      method: 'GET',
+      url: 'api/highscores'
+    })
+    .success(function(data, status, headers, config){
+      $scope.highscores = data;
+    });
+
   });
+

@@ -12,7 +12,7 @@ var express = require('express'),
 
 
 var app = module.exports = express();
-
+app.use(express.bodyParser());
 /**
  * Configuration
  */
@@ -53,6 +53,8 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 app.get('/api/name', api.name);
+app.get('/api/highscores', api.highscores);
+app.post('/api/highscores', api.submitHighScore);
 
 // redirect all others to the index (HTML5 history)
 app.get('/home', routes.index);

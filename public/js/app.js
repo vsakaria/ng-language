@@ -19,6 +19,10 @@ angular.module('myApp', [
             templateUrl: 'partials/game.html',
             controller: 'Game'
         })
+        .when('/highscores', {
+            templateUrl: 'partials/highscores.html',
+            controller: 'Highscores'
+        })
         .otherwise({
             redirectTo: '/home'
         });
