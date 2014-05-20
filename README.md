@@ -12,3 +12,4 @@ To run the app
 1. npm install
 2. bower install
 3. node app.js
+4. Run on http://localhost:3000/
