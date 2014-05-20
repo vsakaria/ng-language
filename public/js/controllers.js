@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-  app.controller('Game', function($scope, QA, $http) {
+app.controller('Game', function($scope, $http, QA, $location) {
     $scope.round = 1;
     $scope.playing = true;
 
@@ -38,7 +38,7 @@
         data: {"name": $scope.name, "score": $scope.score}
       })
       .success(function(data, status, headers, config){
-        //create redirect here
+        $location.path('/highscores');
       });
     };
   })
