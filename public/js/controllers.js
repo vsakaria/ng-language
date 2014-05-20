@@ -4,7 +4,7 @@
 
 angular.module('myApp.controllers', [])
 
-  .controller('Game', function($scope, QA, $http) {
+  .controller('Game', function($scope, $http, QA, $location) {
     $scope.round = 1;
     $scope.playing = true;
 
@@ -40,7 +40,7 @@ angular.module('myApp.controllers', [])
         data: {"name": $scope.name, "score": $scope.score}
       })
       .success(function(data, status, headers, config){
-        //create redirect here
+        $location.path('/highscores');
       });
     };
   })
