@@ -1,13 +1,13 @@
 <section ng-show='playing'>
   <h1> Welcome to the Game you are on round {{ round }}</h1>
-  <section class='question'>
+  <article class='question'>
     <h1>{{ question.en }}</h1>
     <h3>{{ question.def }}</h3>
-  </section>
+  </article>
 
-  <section class='answers' ng-repeat='answer in answers'>
+  <article class='answers' ng-repeat='answer in answers'>
     <div ng-click='submitAnswer(question, answer)'>{{ answer.es }}</div>
-  </section>
+  </article>
 </section>
 
 <section ng-show='!playing'>

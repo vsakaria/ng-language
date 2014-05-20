@@ -2,13 +2,7 @@
  * Serve JSON to our AngularJS client
  */
 
-var fs  = require('fs');
-
-exports.name = function (req, res) {
-  res.json({
-  	name: 'Busuu'
-  });
-};
+var fs = require('fs');
 
 exports.highscores = function(req , res) {
   fs.readFile('data/highscores.json', function (err, data) {
@@ -29,9 +23,9 @@ exports.submitHighScore = function(req, res) {
       if (a.score==b.score) return 0;
       if (a.score <  b.score)  return 1;
       if (a.score > b.score) return -1;
-    });
+  });
 
-    fs.writeFile(
+  fs.writeFile(
       'data/highscores.json',
       JSON.stringify(highscores),
       function(err) {
@@ -39,6 +33,6 @@ exports.submitHighScore = function(req, res) {
         res.json(highscores);
       }
     );
-
   });
+
 };

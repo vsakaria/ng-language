@@ -50,7 +50,6 @@ angular.module('myApp.services', [])
     }])
 
     .factory('ShuffleArray', function(){
-
         var ShuffleArray = {
             shuffle: function(array) {
               var currentIndex = array.length
@@ -75,17 +74,16 @@ angular.module('myApp.services', [])
         var randwords = []
 
         var RandWords = {
-            get: function() {
-                randwords = ShuffleArray.shuffle(words).slice(0,9);
+            get: function(amount) {
+                randwords = ShuffleArray.shuffle(words).slice(0,amount);
                 return randwords;
             }
-        }
-
+        };
         return RandWords;
     })
 
     .factory('QA', function(ShuffleArray, RandWords){
-        var answersBucket = RandWords.get();
+        var answersBucket = RandWords.get(9);
         var questionsBucket = answersBucket;
         var questionToRemove, answers, question;
 
@@ -97,7 +95,6 @@ angular.module('myApp.services', [])
             question: function(){
                 questionToRemove = questionsBucket.indexOf(answers[Math.floor(Math.random() * 3)]);
                 question = questionsBucket.splice(questionToRemove, 1)[0];
-                console.log(answersBucket)
                 return question;
             }
         };

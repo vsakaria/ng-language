@@ -12,8 +12,7 @@ angular.module('myApp', [
 .config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/home', {
-            templateUrl: 'partials/home.html',
-            controller: 'AppCtrl'
+            templateUrl: 'partials/home.html'
         })
         .when('/game', {
             templateUrl: 'partials/game.html',
@@ -26,6 +25,5 @@ angular.module('myApp', [
         .otherwise({
             redirectTo: '/home'
         });
-
     $locationProvider.html5Mode(true);
 });
