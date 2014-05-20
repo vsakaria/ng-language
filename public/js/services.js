@@ -48,7 +48,7 @@ app.value('words', [{
     def: 'Kind and pleasant.'
   }])
 
-    app.factory('Service', function(){
+    .factory('Service', function(){
         var service = {
             one: function(){
                 return 1;
@@ -57,7 +57,7 @@ app.value('words', [{
         return service;
       })
 
-    app.factory('ShuffleArray', function(){
+    .factory('ShuffleArray', function(){
         var ShuffleArray = {
             shuffle: function(array) {
               var currentIndex = array.length,
@@ -78,7 +78,7 @@ app.value('words', [{
         return ShuffleArray;
       })
 
-    app.factory('RandWords', function(words, ShuffleArray) {
+    .factory('RandWords', function(words, ShuffleArray) {
         var randwords = [];
 
         var RandWords = {
@@ -90,7 +90,7 @@ app.value('words', [{
         return RandWords;
       })
 
-    app.factory('QA', function(ShuffleArray, RandWords){
+    .factory('QA', function(ShuffleArray, RandWords){
         var answersBucket = RandWords.get(9);
         var questionsBucket = answersBucket;
         var questionToRemove, answers, question;
