@@ -2,9 +2,7 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', [])
-
-  .controller('Game', function($scope, QA, $http) {
+  app.controller('Game', function($scope, QA, $http) {
     $scope.round = 1;
     $scope.playing = true;
 
@@ -45,7 +43,7 @@ angular.module('myApp.controllers', [])
     };
   })
 
-  .controller('Highscores', function($scope, $http){
+  app.controller('Highscores', function($scope, $http){
     $http({
       method: 'GET',
       url: 'api/highscores'

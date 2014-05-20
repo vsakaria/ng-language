@@ -8,5 +8,12 @@
     "express": "~3.4.7",
     "ejs": "~0.8.5",
     "bower": "~1.2.8"
+  },
+  "devDependencies": {
+    "karma-ng-html2js-preprocessor": "~0.1.0",
+    "karma-ng-scenario": "~0.1.0",
+    "grunt-karma": "~0.8.3",
+    "karma-jasmine": "~0.1.5",
+    "karma-chrome-launcher": "~0.1.3"
   }
 }

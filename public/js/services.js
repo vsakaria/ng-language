@@ -2,59 +2,67 @@
 
 /* Services */
 
-angular.module('myApp.services', [])
-    .value('words', [{
-        "en": "Good morning",
-        "es": "Buenos días",
-        def: "A conventional expression of greeting or farewell used in the morning."
-    }, {
-        "en": "Apple",
-        "es": "Manzana",
-        def: "The round fruit of an apple tree, which typically has thin green or red skin."
-    }, {
-        "en": "Brother",
-        "es": "Hermano",
-        def: "A man or boy in relation to other sons and daughters of his parents."
-    }, {
-        "en": "Red",
-        "es": "Rojo",
-        def: "The colour of blood, fire, or rubies."
-    }, {
-        "en": "Germany",
-        "es": "Alemania",
-        def: "A country in central Europe whose capital is Berlin. "
-    }, {
-        "en": "Seven",
-        "es": "Siete",
-        def: "A number equivalent to the sum of three and four."
-    }, {
-        "en": "Learn",
-        "es": "Aprender",
-        def: "Gain or acquire knowledge in something by study, experience, or being taught."
-    }, {
-        "en": "Sun",
-        "es": "Sol",
-        def: "The star round which the earth orbits."
-    }, {
-        "en": "House",
-        "es": "Casa",
-        def: "A building for human habitation."
-    }, {
-        "en": "Young",
-        "es": "Joven",
-        def: "Having lived or existed for only a short time."
-    }, {
-        "en": "Friendly",
-        "es": "Amigable",
-        def: "Kind and pleasant."
-    }])
+app.value('words', [{
+    'en': 'Good morning',
+    'es': 'Buenos días',
+    def: 'A conventional expression of greeting or farewell used in the morning.'
+  }, {
+    'en': 'Apple',
+    'es': 'Manzana',
+    def: 'The round fruit of an apple tree, which typically has thin green or red skin.'
+  }, {
+    'en': 'Brother',
+    'es': 'Hermano',
+    def: 'A man or boy in relation to other sons and daughters of his parents.'
+  }, {
+    'en': 'Red',
+    'es': 'Rojo',
+    def: 'The colour of blood, fire, or rubies.'
+  }, {
+    'en': 'Germany',
+    'es': 'Alemania',
+    def: 'A country in central Europe whose capital is Berlin. '
+  }, {
+    'en': 'Seven',
+    'es': 'Siete',
+    def: 'A number equivalent to the sum of three and four.'
+  }, {
+    'en': 'Learn',
+    'es': 'Aprender',
+    def: 'Gain or acquire knowledge in something by study, experience, or being taught.'
+  }, {
+    'en': 'Sun',
+    'es': 'Sol',
+    def: 'The star round which the earth orbits.'
+  }, {
+    'en': 'House',
+    'es': 'Casa',
+    def: 'A building for human habitation.'
+  }, {
+    'en': 'Young',
+    'es': 'Joven',
+    def: 'Having lived or existed for only a short time.'
+  }, {
+    'en': 'Friendly',
+    'es': 'Amigable',
+    def: 'Kind and pleasant.'
+  }])
 
-    .factory('ShuffleArray', function(){
+    app.factory('Service', function(){
+        var service = {
+            one: function(){
+                return 1;
+              }
+          };
+        return service;
+      })
+
+    app.factory('ShuffleArray', function(){
         var ShuffleArray = {
             shuffle: function(array) {
-              var currentIndex = array.length
-                , temporaryValue
-                , randomIndex;
+              var currentIndex = array.length,
+                  temporaryValue,
+                  randomIndex;
 
               while (0 !== currentIndex) {
                 randomIndex = Math.floor(Math.random() * currentIndex);
@@ -66,23 +74,23 @@ angular.module('myApp.services', [])
               }
               return array;
             }
-        };
+          };
         return ShuffleArray;
-    })
+      })
 
-    .factory('RandWords', function(words, ShuffleArray) {
-        var randwords = []
+    app.factory('RandWords', function(words, ShuffleArray) {
+        var randwords = [];
 
         var RandWords = {
             get: function(amount) {
                 randwords = ShuffleArray.shuffle(words).slice(0,amount);
                 return randwords;
-            }
-        };
+              }
+          };
         return RandWords;
-    })
+      })
 
-    .factory('QA', function(ShuffleArray, RandWords){
+    app.factory('QA', function(ShuffleArray, RandWords){
         var answersBucket = RandWords.get(9);
         var questionsBucket = answersBucket;
         var questionToRemove, answers, question;
@@ -90,13 +98,13 @@ angular.module('myApp.services', [])
         var QA = {
             answers: function(){
                 answers = ShuffleArray.shuffle(answersBucket).slice(0,3);
-                return answers
-            },
+                return answers;
+              },
             question: function(){
                 questionToRemove = questionsBucket.indexOf(answers[Math.floor(Math.random() * 3)]);
                 question = questionsBucket.splice(questionToRemove, 1)[0];
                 return question;
-            }
-        };
+              }
+          };
         return QA;
-    });
+      });
