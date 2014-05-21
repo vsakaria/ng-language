@@ -48,15 +48,6 @@ app.value('words', [{
     def: 'Kind and pleasant.'
   }])
 
-    .factory('Service', function(){
-        var service = {
-            one: function(){
-                return 1;
-              }
-          };
-        return service;
-      })
-
     .factory('ShuffleArray', function(){
         var ShuffleArray = {
             shuffle: function(array) {
@@ -96,8 +87,11 @@ app.value('words', [{
         var questionToRemove, answers, question;
 
         var QA = {
-            answers: function(){
-                answers = ShuffleArray.shuffle(answersBucket).slice(0,3);
+            questionsBucket: questionsBucket,
+            answers: function(amount){
+                if(typeof(amount) === 'undefined') amount = 3;
+
+                answers = ShuffleArray.shuffle(answersBucket).slice(0,amount);
                 return answers;
               },
             question: function(){
