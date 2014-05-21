@@ -48,57 +48,70 @@ app.value('words', [{
     def: 'Kind and pleasant.'
   }])
 
-    .factory('ShuffleArray', function(){
-        var ShuffleArray = {
-            shuffle: function(array) {
-              var currentIndex = array.length,
-                  temporaryValue,
-                  randomIndex;
+  .constant('Rounds', 3)
 
-              while (0 !== currentIndex) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
+  .factory('ShuffleArray', function(){
+      var ShuffleArray = {
+          shuffle: function(array) {
+            var currentIndex = array.length,
+                temporaryValue,
+                randomIndex;
 
-                temporaryValue = array[currentIndex];
-                array[currentIndex] = array[randomIndex];
-                array[randomIndex] = temporaryValue;
-              }
-              return array;
+            while (0 !== currentIndex) {
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex -= 1;
+
+              temporaryValue = array[currentIndex];
+              array[currentIndex] = array[randomIndex];
+              array[randomIndex] = temporaryValue;
             }
-          };
-        return ShuffleArray;
-      })
+            return array;
+          }
+        };
+      return ShuffleArray;
+    })
 
-    .factory('RandWords', function(words, ShuffleArray) {
-        var randwords = [];
+  .factory('RandWords', function(words, ShuffleArray) {
+      var randwords = [];
 
-        var RandWords = {
-            get: function(amount) {
-                randwords = ShuffleArray.shuffle(words).slice(0,amount);
-                return randwords;
-              }
-          };
-        return RandWords;
-      })
+      var RandWords = {
+          get: function(amount) {
+              randwords = ShuffleArray.shuffle(words).slice(0,amount);
+              return randwords;
+            }
+        };
+      return RandWords;
+    })
 
-    .factory('QA', function(ShuffleArray, RandWords){
-        var answersBucket = RandWords.get(9);
-        var questionsBucket = answersBucket;
-        var questionToRemove, answers, question;
+  .factory('QA', function(ShuffleArray, RandWords){
+      var answersBucket = RandWords.get(9);
+      var questionsBucket = answersBucket;
+      var questionToRemove, answers, question, amount;
 
-        var QA = {
-            questionsBucket: questionsBucket,
-            answers: function(amount){
-                if(typeof(amount) === 'undefined') amount = 3;
+      var QA = {
+          reset: function(){
+            answersBucket = RandWords.get(9);
+            questionsBucket = answersBucket;
+          },
 
-                answers = ShuffleArray.shuffle(answersBucket).slice(0,amount);
-                return answers;
-              },
-            question: function(){
-                questionToRemove = questionsBucket.indexOf(answers[Math.floor(Math.random() * 3)]);
-                question = questionsBucket.splice(questionToRemove, 1)[0];
-                return question;
-              }
-          };
-        return QA;
-      });
+          //I didn't want to expose this data but due to testing I had to.
+          questionsBucket: questionsBucket,
+
+          answers: function(number){
+              if(typeof(number) === 'undefined'){
+                amount = 3;
+              } else { amount = number; }
+
+              answers = ShuffleArray.shuffle(answersBucket).slice(0,amount);
+              return answers;
+            },
+
+          question: function(){
+              //Finds
+              questionToRemove = questionsBucket.indexOf(answers[Math.floor(Math.random() * amount)]);
+              question = questionsBucket.splice(questionToRemove, 1)[0];
+              return question;
+            }
+        };
+      return QA;
+    });
