@@ -51,7 +51,6 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // JSON API
-app.get('/api/name', api.name);
 app.get('/api/highscores', api.highscores);
 app.post('/api/highscores', api.submitHighScore);
 
